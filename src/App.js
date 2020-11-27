@@ -1,12 +1,19 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Navigation, Wrapper, LoadingIndicator, Button } from 'components'
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { fetchBudget, fetchBudgetedCategories } from 'data/actions/budget.actions'
 import GlobalStyle from 'index.css'
 import theme from 'utils/theme'
 
-const App = () => {
+const App = ({ budget, fetchBudget, fetchBudgetedCategories }) => {
+	useEffect(() => {
+		fetchBudget(1)
+		fetchBudgetedCategories(1)
+	}, [fetchBudget, fetchBudgetedCategories])
+
 	const { t, i18n } = useTranslation()
 
 	return (
@@ -43,11 +50,24 @@ const App = () => {
 	)
 }
 
+const ConnectedApp = connect(
+	state => {
+		return {
+			budget: state.budget.budget,
+			common: state.common.allCategories,
+		}
+	},
+	{
+		fetchBudget,
+		fetchBudgetedCategories,
+	}
+)(App)
+
 const RootApp = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Suspense fallback={<LoadingIndicator />}>
-				<App />
+				<ConnectedApp />
 			</Suspense>
 		</ThemeProvider>
 	)
