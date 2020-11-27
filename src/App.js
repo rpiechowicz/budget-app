@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Navigation, Wrapper, LoadingIndicator } from 'components'
+import { Navigation, Wrapper, LoadingIndicator, Button } from 'components'
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -21,8 +21,12 @@ const App = () => {
 					]}
 					RightElement={
 						<div>
-							<button onClick={() => i18n.changeLanguage('pl')}>PL</button>
-							<button onClick={() => i18n.changeLanguage('en')}>EN</button>
+							<Button variant="regular" onClick={() => i18n.changeLanguage('pl')}>
+								PL
+							</Button>
+							<Button variant="regular" onClick={() => i18n.changeLanguage('en')}>
+								EN
+							</Button>
 						</div>
 					}
 				/>
