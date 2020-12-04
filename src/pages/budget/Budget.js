@@ -5,7 +5,9 @@ import { fetchAllCategories } from 'data/actions/common.actions'
 
 import { Grid } from './Budget.css'
 import { LoadingIndicator } from 'components'
+
 import BudgetCategoryList from 'pages/budget/components/BudgetCategoryList'
+import BudgetTransactionList from 'pages/budget/components/BudgetTransactionList'
 
 const Budget = ({
 	commonState,
@@ -32,7 +34,7 @@ const Budget = ({
 	return (
 		<Grid>
 			<section>{isLoaded ? <BudgetCategoryList /> : <LoadingIndicator />}</section>
-			<section>{isLoaded ? 'Transaction list' : <LoadingIndicator />}</section>
+			<section>{isLoaded ? <BudgetTransactionList /> : <LoadingIndicator />}</section>
 		</Grid>
 	)
 }

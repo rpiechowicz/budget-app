@@ -6,12 +6,14 @@ import {
 	BUDGETED_CATEGORIES_GET_REQUEST,
 	BUDGETED_CATEGORIES_GET_SUCCESS,
 	BUDGETED_CATEGORIES_GET_FAILURE,
+	SET_SELECTED_PARENT_CAREGORY_ID,
 } from 'data/constants'
 
 const inictialState = {
 	loadingState: null,
 	budget: {},
 	budgetCategories: [],
+	selectedParentCategoryId: undefined,
 }
 
 const budget = (state = inictialState, action) => {
@@ -65,6 +67,11 @@ const budget = (state = inictialState, action) => {
 				...state,
 				budgetCategories: {},
 				loadingState: newLoadingState,
+			}
+		case SET_SELECTED_PARENT_CAREGORY_ID:
+			return {
+				...state,
+				selectedParentCategoryId: action.payload,
 			}
 		default:
 			return state
