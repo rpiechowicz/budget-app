@@ -8,6 +8,6 @@ export const LOADING_STATES = {
 	FAILED: 'FAILED',
 }
 
-export default {
-	LOADING_STATES,
-}
+const data = { LOADING_STATES }
+
+export default data
