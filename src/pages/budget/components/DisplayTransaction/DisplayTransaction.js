@@ -42,7 +42,7 @@ const DisplayTransaction = ({
 						{t('Date')}: {formatDate(currentTransaction.date, language)}
 					</div>
 					<div>
-						{t('Category')}: {categoryByCurrentTransaction}
+						{t('Category')}: {categoryByCurrentTransaction ? categoryByCurrentTransaction : 'Brak'}
 					</div>
 				</div>
 			) : (
