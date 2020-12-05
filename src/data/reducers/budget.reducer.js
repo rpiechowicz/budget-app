@@ -9,6 +9,7 @@ import {
 	BUDGET_TRANSACTION_ADD_REQUEST,
 	BUDGET_TRANSACTION_ADD_SUCCESS,
 	SET_SELECTED_PARENT_CAREGORY_ID,
+	SET_SELECTED_DISPLAY_TRANSACTION_ID,
 } from 'data/constants'
 
 const inictialState = {
@@ -74,6 +75,11 @@ const budget = (state = inictialState, action) => {
 			return {
 				...state,
 				selectedParentCategoryId: action.payload,
+			}
+		case SET_SELECTED_DISPLAY_TRANSACTION_ID:
+			return {
+				...state,
+				selectedDisplayTransactionId: action.payload,
 			}
 		case BUDGET_TRANSACTION_ADD_REQUEST: {
 			return {
