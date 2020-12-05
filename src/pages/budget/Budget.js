@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
+
 import { fetchBudget, fetchBudgetedCategories } from 'data/actions/budget.actions'
 import { fetchAllCategories } from 'data/actions/common.actions'
 
 import { Grid } from './Budget.css'
-import { LoadingIndicator } from 'components'
+import { LoadingIndicator, Modal, Button } from 'components'
 
 import BudgetCategoryList from 'pages/budget/components/BudgetCategoryList'
 import BudgetTransactionList from 'pages/budget/components/BudgetTransactionList'
@@ -32,10 +34,27 @@ const Budget = ({
 	)
 
 	return (
-		<Grid>
-			<section>{isLoaded ? <BudgetCategoryList /> : <LoadingIndicator />}</section>
-			<section>{isLoaded ? <BudgetTransactionList /> : <LoadingIndicator />}</section>
-		</Grid>
+		<section>
+			<Grid>
+				<section>{isLoaded ? <BudgetCategoryList /> : <LoadingIndicator />}</section>
+				<section>
+					{isLoaded ? (
+						<>
+							<Button to="/budget/transactions/new">Add new transaction</Button>
+							<BudgetTransactionList />
+						</>
+					) : (
+						<LoadingIndicator />
+					)}
+				</section>
+			</Grid>
+
+			<Switch>
+				<Route path="/budget/transactions/new">
+					<Modal>Modal content</Modal>
+				</Route>
+			</Switch>
+		</section>
 	)
 }
 
