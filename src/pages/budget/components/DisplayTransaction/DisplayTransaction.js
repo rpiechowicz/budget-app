@@ -9,6 +9,7 @@ const DisplayTransaction = ({
 	transactions,
 	selectedDisplayTransactionId,
 	selectDisplayTransaction,
+	allCategories,
 }) => {
 	const {
 		t,
@@ -24,7 +25,10 @@ const DisplayTransaction = ({
 		[transactions, selectedDisplayTransactionId]
 	)
 
-	console.log({ transactions, selectedDisplayTransactionId })
+	const categoryByCurrentTransaction = useMemo(() => {
+		return (allCategories.find(category => category.id === currentTransaction.categoryId) || {})
+			.name
+	}, [allCategories, currentTransaction])
 
 	return (
 		<>
@@ -36,6 +40,9 @@ const DisplayTransaction = ({
 					</div>
 					<div>
 						{t('Date')}: {formatDate(currentTransaction.date, language)}
+					</div>
+					<div>
+						{t('Category')}: {categoryByCurrentTransaction}
 					</div>
 				</div>
 			) : (
@@ -50,6 +57,7 @@ export default connect(
 		return {
 			transactions: state.budget.budget.transactions,
 			selectedDisplayTransactionId: state.budget.selectedDisplayTransactionId,
+			allCategories: state.common.allCategories,
 		}
 	},
 	{ selectDisplayTransaction }
